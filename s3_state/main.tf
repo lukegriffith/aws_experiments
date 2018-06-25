@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket  = "${var.namespace}-tfstate-store"
+    bucket  = "tfe-bee-tfstate-store"
     key     = "root.tfstate"
     encrpyt = true
   }
