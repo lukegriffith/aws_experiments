@@ -2,7 +2,8 @@ terraform {
   backend "s3" {
     bucket  = "tfe-bee-tfstate-store"
     key     = "root.tfstate"
-    encrpyt = true
+    encrypt = true
+    region  = "eu-west-1"
   }
 }
 
