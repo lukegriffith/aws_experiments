@@ -1,7 +1,14 @@
-terraform {}
+terraform {
+  backend "s3" {
+    bucket  = "${var.namespace}-tfstate-store"
+    key     = "root.tfstate"
+    encrpyt = true
+  }
+}
 
 provider "aws" {
   version = "~> 1.16"
+  region  = "eu-west-1"
 }
 
 resource "aws_s3_bucket" "tf-state-store" {
