@@ -1,3 +1,3 @@
 variable "remote_state_path" {
-  default = "../output_state"
+  default = "../output_state/terraform.tfstate"
 }
