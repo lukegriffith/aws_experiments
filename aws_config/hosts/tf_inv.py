@@ -15,8 +15,11 @@ def parseTfOut(path):
 def formatTf(parsedTf):
 
     return {
-        "all": {
+        "nodes": {
             "hosts": parsedTf['public_ip']['value']
+        },
+        "consul_server": {
+            "hosts": [parsedTf['public_ip']['value'][0]] 
         }
     }
 

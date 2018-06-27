@@ -1,0 +1,14 @@
+{
+  "datacenter": "eu-west-1",
+  "data_dir": "/tmp/consul",
+  "log_level": "INFO",
+  "node_name": "{{node_name}}",
+  "bind_addr": "{{private_ip}}",
+  "server": {% if is_server%} true{% else %} false {% endif %},
+  {% if is_server %} 
+  "bootstrap_expect": 1,
+  {% endif %}
+  "telemetry": {
+     "statsite_address": "127.0.0.1:2180"
+  }
+}

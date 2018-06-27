@@ -1,5 +1,10 @@
 ---
 
+- name: install unzip
+  yum:
+    name: unzip
+    state: present
+
 - name: download consul
   get_url: 
     url: https://releases.hashicorp.com/consul/1.2.0/consul_1.2.0_linux_amd64.zip 
@@ -12,14 +17,38 @@
     dest: /usr/bin
     remote_src: yes
 
+- name: create consul user
+  user:
+    name: consul
+
 - name: create consul data dir
   file:
     path: /tmp/consul
     state: directory
-    mode: 0077
+    owner: consul
+    group: consul
+    recurse: yes
+    mode: 0777
 
 - name: create consul config dir
   file:
     path: /etc/consul.d
     state: directory
-    mode: 0077
+    group: consul
+    owner: consul
+    recurse: yes
+    mode: 0777
+
+
+
+- set_fact: 
+    private_ip: "{{ansible_eth0.ipv4['address']}}"
+    node_name: "{{ansible_hostname}}"
+
+- import_tasks: server.yml
+  when: is_server
+
+- import_tasks: agent.yml
+  when: not is_server
+
+- import_tasks: unitConfig.yml

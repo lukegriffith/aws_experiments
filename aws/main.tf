@@ -11,20 +11,17 @@ data "aws_ami" "LinuxAMI" {
   most_recent = true
 
   filter {
-    name   = "owner-alias"
-    values = ["amazon"]
+    name   = "name"
+    values = ["centos-7*"]
   }
 
-  filter {
-    name   = "name"
-    values = ["amzn-ami-vpc-nat*"]
-  }
+  owners = ["895883528040"]
 }
 
 resource "aws_instance" "web" {
   ami           = "${data.aws_ami.LinuxAMI.id}"
   instance_type = "t2.micro"
-  count         = 2
+  count         = 7
   key_name      = "${aws_key_pair.deployer.key_name}"
 
   tags {

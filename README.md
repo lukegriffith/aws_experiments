@@ -30,4 +30,7 @@ with lifecycle directives (Create before destroy, dont destroy) local exec can b
 
 - Bootstrap layer for base dependecies
     - Not reliant on any cloud
-    
+
+
+# SystemD
+one-shot services can be used as service healthchecks.

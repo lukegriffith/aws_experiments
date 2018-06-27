@@ -1,0 +1,4 @@
+---
+
+- set_fact:
+    is_server: false
