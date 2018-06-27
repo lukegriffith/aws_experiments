@@ -33,7 +33,6 @@ with lifecycle directives (Create before destroy, dont destroy) local exec can b
 # SystemD
 one-shot services can be used as service healthchecks.
 
-<<<<<<< HEAD
 # Dutch National Police
 Openstack deploying VM's with Terraform. 
 
@@ -64,7 +63,6 @@ Need to create a pipeline, where we use ansible to configure an image, then wok 
 Need to identify;
 - Actions that are not dependant on the state.
 IE, the current ansible plays get to enabling consul.service, but that can be put into the packer image. Break the play up and run it in a packer stage before to create the AMI.
-=======
 
 # Interesting Talks
 Grey Failures.
@@ -72,6 +70,21 @@ Everything as Code.
 Usecases from French bank + dutch police. 
 
 
+# Facade 
+The facade can be considered the front door to what we're giving to the developers.
 
->>>>>>> 881d1596a121771c0c0150158af12b1dc60840c6
+To work on: 
+IaC repository structure guidelines.
+Sentinel review on workspaces, to enforce that only certain modules are used.
+Versioned modules in the repository. 
 
+
+To Develop:
+Reference architecture, that can be templated
+Workspaces that provide API end points. What API end point
+
+Demo:
+Merge pull review, have infrastructure built with githooks approval process in github.
+
+Peer review of infrastructure. 
+VM Built 
