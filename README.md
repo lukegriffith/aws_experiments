@@ -34,3 +34,13 @@ with lifecycle directives (Create before destroy, dont destroy) local exec can b
 
 # SystemD
 one-shot services can be used as service healthchecks.
+
+
+# Interesting Talks
+Grey Failures.
+Everything as Code.
+Usecases from French bank + dutch police. 
+
+
+
+
