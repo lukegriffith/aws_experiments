@@ -1,34 +1,28 @@
 ---
 
-- hosts: consul_server
-  gather_facts: yes
-  tasks:
-    - set_fact:
-        is_server: true
-    - add_host:
-        name: info_collection
-        groups: info
-        consul_ip: "{{ansible_eth0.ipv4['address']}}"
-    
-
-- hosts: all:!consul_server:!info
-  gather_facts: no
-  tasks:
-    - set_fact:
-        is_server: false
-
-- hosts: all:!info
+- hosts: all
   gather_facts: yes 
   become: yes
   roles:
     - consul.lg 
-  tasks:
-    - systemd:
-        name: firewalld
-        state: stopped
-        enabled: no
 
-- hosts: all:!consul_server:!info
+- hosts: consul_servers
+  gather_facts: no
+  become: yes
+  tasks:
+    - import_role:
+        name: consul.lg
+        tasks_from: server
+
+- hosts: all:!consul_servers
+  gather_facts: no
+  become: yes
+  tasks:
+    - import_role:
+        name: consul.lg
+        tasks_from: agent
+
+- hosts: all:!consul_master
   gather_facts: no
   tasks:
-    - shell: "consul join {{hostvars['info_collection']['consul_ip']}}"
+    - shell: "consul join {{hostvars[groups['consul_master'][0]].ansible_eth0.ipv4['address']}}"

@@ -1,0 +1,1 @@
+export TF_VAR_pub_key=$(cat ~/.ssh/id_rsa.pub)

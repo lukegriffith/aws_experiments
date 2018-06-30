@@ -2,3 +2,5 @@
 
 - set_fact:
     is_server: false
+
+- import_tasks: unitConfig.yml

@@ -3,7 +3,4 @@
 - set_fact:
     is_server: true
 
-#- firewalld:
-#    port: 8301/tcp
-#    permanent: true
-#    state: enabled
+- import_tasks: unitConfig.yml

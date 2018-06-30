@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from subprocess import check_output
 import json
+import pdb
 
 def parseTfOut(path): 
     tfOutput = check_output([
@@ -14,14 +15,18 @@ def parseTfOut(path):
 
 def formatTf(parsedTf):
 
-    return {
-        "nodes": {
-            "hosts": parsedTf['public_ip']['value']
-        },
-        "consul_server": {
-            "hosts": [parsedTf['public_ip']['value'][0]] 
-        }
-    }
+    inventory = {}
+    for group in parsedTf.keys():
+        if 'ansible_' in group: 
+            g = str(group)
+            g = g.replace('ansible_', '')
+            inventory[g] = {}
+            inventory[g]['hosts'] = parsedTf[group]['value'] if type(parsedTf[group]['value']) == list else [parsedTf[group]['value']]
+
+    return inventory
 
 
-print(formatTf(parseTfOut('/Users/luke/GitHub/HashiDays/aws')))
+pto = parseTfOut('/Users/luke/GitHub/HashiDays/aws')
+
+ft = formatTf(pto)
+print(ft)

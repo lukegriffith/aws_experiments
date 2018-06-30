@@ -8,14 +8,12 @@ I've created a terraform workspace, and ansible playbook that create a number of
 # Configure AWS credentials.
 aws configure # Enter access/secrey key.
 
-# Cat content of public key, for terraform variable.
-ssh_pub_key=$(cat ~/.ssh/id_rsa.pub)
-
+# Cat content of public key, and export terraform variable.
+export TF_VAR_pub_key=$(cat ~/.ssh/id_rsa.pub)
 
 # Working path of HashiDays/aws.
 # Conver to use environment variables, once you know the syntax for it.
-terraform init && terraform apply --auto-approve /
-    -var "public_key=$ssh_pub_key"
+terraform init && terraform apply --auto-approve
 cd ../aws_config
 
 # if not using id_rsa.pub as public key, access key will need to be explicitly set in the ansible.cfg

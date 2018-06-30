@@ -44,11 +44,3 @@
 - set_fact: 
     private_ip: "{{ansible_eth0.ipv4['address']}}"
     node_name: "{{ansible_hostname}}"
-
-- import_tasks: server.yml
-  when: is_server
-
-- import_tasks: agent.yml
-  when: not is_server
-
-- import_tasks: unitConfig.yml
