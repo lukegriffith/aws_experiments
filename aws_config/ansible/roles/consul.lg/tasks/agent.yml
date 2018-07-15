@@ -1,6 +1,6 @@
 ---
 
 - set_fact:
-    is_server: false
+    is_consul_server: false
 
 - import_tasks: unitConfig.yml
