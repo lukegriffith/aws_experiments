@@ -1,0 +1,8 @@
+---
+# Registers the exporter with Consul
+
+- name: Registers the exporter with Consul
+  copy: 
+    src: consul_service.json
+    dest: /etc/consul.d/10-service.json
+  notify: Reload consul config

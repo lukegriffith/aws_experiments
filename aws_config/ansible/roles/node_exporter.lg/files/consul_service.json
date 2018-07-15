@@ -1,0 +1,7 @@
+{
+    "service": {
+        "name": "node_exporter", 
+        "tags": ["metrics"], 
+        "port": 9100
+    }
+}

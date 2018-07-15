@@ -1,7 +1,14 @@
 ---
 
-- hosts: all
-  gather_facts: yes 
+#- hosts: all
+#  gather_facts: yes 
+#  become: yes
+#  roles:
+#    - consul.lg 
+#    - node_exporter.lg
+
+- hosts: prometheus_server
+  gather_facts: no
   become: yes
   roles:
-    - consul.lg 
+    - prometheus.lg

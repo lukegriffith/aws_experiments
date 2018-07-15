@@ -1,0 +1,38 @@
+---
+
+- name: download node_exporter
+  get_url: 
+    url: "{{url}}"
+    dest: "/var/tmp/node_exporter-0.16.0.linux-amd64.tar.gz"
+    checksum: sha256:{{checksum}}
+
+- name: create node_exporter user
+  user:
+    name: node_exporter
+
+- name: Create /opt/node_exporter
+  file:
+    path: /opt/node_exporter
+    state: directory
+    owner: node_exporter
+    group: node_exporter
+    mode: 0777
+    recurse: yes
+
+
+- name: unarchive node exporter
+  unarchive:
+    src: "/var/tmp/node_exporter-0.16.0.linux-amd64.tar.gz"
+    dest: /opt/node_exporter/
+    remote_src: yes
+
+- name: Configure systemd unit
+  copy:
+    src: node_exporter.service
+    dest: /etc/systemd/system
+
+- name: enable node_exporter
+  systemd:
+    name: node_exporter.service
+    enabled: yes
+    state: started

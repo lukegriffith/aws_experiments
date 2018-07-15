@@ -1,0 +1,68 @@
+---
+
+- name: download prometheus
+  get_url: 
+    url: "{{url}}"
+    dest: "/var/tmp/prometheus-2.3.2.linux-amd64.tar.gz"
+    checksum: sha256:{{checksum}}
+
+- name: create prometheus user
+  user:
+    name: prometheus
+
+
+- name: Create /etc/prometheus
+  file:
+    path: /etc/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: 0777
+    recurse: yes
+
+- name: Create /var/prometheus
+  file:
+    path: /var/prometheus
+    state: directory
+    owner: prometheus
+    group: prometheus
+    mode: 0777
+    recurse: yes
+
+
+- name: unarchive prometheus
+  unarchive:
+    src: "/var/tmp/prometheus-2.3.2.linux-amd64.tar.gz"
+    dest: /var/tmp
+    remote_src: yes
+
+- name: copy scape config
+  copy:
+    src: scrape_config.yml
+    dest: /etc/prometheus/scrape_config.yml
+
+- name: copy prometheus to local bin
+  copy:
+    src: /var/tmp/prometheus-2.3.2.linux-amd64/prometheus
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: u+rwx,g+rwx,o+rwx
+
+- name: copy console_libraries
+  command: cp -R /var/tmp/prometheus-2.3.2.linux-amd64/console_libraries /etc/prometheus
+
+
+- name: copy consoles
+  command: cp -R /var/tmp/prometheus-2.3.2.linux-amd64/consoles /etc/prometheus
+
+
+- name: configure systemd unit
+  copy:
+    src: prometheus.service
+    dest: /etc/systemd/system
+
+- name: enable prometheus
+  systemd:
+    name: prometheus.service
+    enabled: yes
+    state: started
