@@ -1,0 +1,49 @@
+--- 
+
+- set_fact: 
+    private_ip: "{{ansible_eth0.ipv4['address']}}"
+    node_name: "{{ansible_hostname}}"
+
+
+
+- name: Configure systemd unit
+  copy:
+    src: consul.service
+    dest: /etc/systemd/system
+
+
+- block: 
+  - name: Template consul config [Base]
+    template:
+      src: consul_base.j2
+      dest: /etc/consul.d/00-config.json
+    notify: Reload consul config
+
+  - name: Template consul config [Agents]
+    template:
+      src: consul_agent.j2
+      dest: /etc/consul.d/01-config.json
+    when: inventory_hostname not in groups['consul_servers']
+    notify: Reload consul config
+  
+  - name: Template consul config [Servers]
+    template:
+      src: consul_server.j2
+      dest: /etc/consul.d/01-config.json
+    when: inventory_hostname in groups['consul_servers']
+    notify: Reload consul config
+
+  vars: 
+    consul_server_ip: |
+        [
+        {% for server in groups['consul_servers'] %}
+          "{{hostvars[server].ansible_eth0.ipv4['address']}}",
+        {% endfor %}
+        ] 
+
+
+- name: enable consul service
+  systemd:
+    name: consul.service
+    enabled: yes
+    state: started

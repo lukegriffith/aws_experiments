@@ -1,0 +1,23 @@
+---
+- name: create consul user
+  user:
+    name: consul
+
+- name: create consul data dir
+  file:
+    path: /tmp/consul
+    state: directory
+    owner: consul
+    group: consul
+    recurse: yes
+    mode: 0777
+
+- name: create consul config dir
+  file:
+    path: /etc/consul.d
+    state: directory
+    group: consul
+    owner: consul
+    recurse: yes
+    mode: 0777
+

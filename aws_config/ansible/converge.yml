@@ -5,24 +5,3 @@
   become: yes
   roles:
     - consul.lg 
-
-- hosts: consul_servers
-  gather_facts: no
-  become: yes
-  tasks:
-    - import_role:
-        name: consul.lg
-        tasks_from: server
-
-- hosts: all:!consul_servers
-  gather_facts: no
-  become: yes
-  tasks:
-    - import_role:
-        name: consul.lg
-        tasks_from: agent
-
-- hosts: all:!consul_master
-  gather_facts: no
-  tasks:
-    - shell: "consul join {{hostvars[groups['consul_master'][0]].ansible_eth0.ipv4['address']}}"
