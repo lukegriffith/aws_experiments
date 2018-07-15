@@ -1,7 +1,0 @@
-consul agent -server -bootstrap-expect=1 \
-    -data-dir=/tmp/consul -node=agent-one -bind=172.31.15.217 \
-    -enable-script-checks=true -config-dir=/etc/consul.d
-
-
-consul agent -data-dir=/tmp/consul -node=agent-two \
-    -bind=172.31.3.34 -enable-script-checks=true -config-dir=/etc/consul.d
