@@ -1,14 +1,22 @@
 ---
-
-#- hosts: all
-#  gather_facts: yes 
-#  become: yes
-#  roles:
-#    - consul.lg 
-#    - node_exporter.lg
+- hosts: all
+  gather_facts: yes 
+  become: yes
+  roles:
+    - consul.lg 
+    - node_exporter.lg
 
 - hosts: prometheus_server
   gather_facts: no
   become: yes
   roles:
     - prometheus.lg
+
+- hosts: docker_host
+  become: yes
+  vars:
+    pip_install_packages:
+      - name: docker
+  roles:
+    - geerlingguy.pip
+    - docker.lg
