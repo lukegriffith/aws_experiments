@@ -10,3 +10,13 @@ variable "count" {
   description = "count of servers to launch"
   default     = 1
 }
+
+
+variable "tags" {
+  description = "tags"
+  default = {
+    Owner = "lukeg"
+    Created-By = "Terraform"
+
+  }
+}

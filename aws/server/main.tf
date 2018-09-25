@@ -4,7 +4,5 @@ resource "aws_instance" "web" {
   count         = "${var.count}"
   key_name      = "${var.pub_key}"
 
-  tags {
-    Created-By = "Terraform"
-  }
+  tags = "${var.tags}"
 }
