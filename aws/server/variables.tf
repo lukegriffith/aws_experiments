@@ -20,3 +20,8 @@ variable "tags" {
 
   }
 }
+
+variable "type" {
+  description = "type of server"
+  default = "t2.micro"
+}

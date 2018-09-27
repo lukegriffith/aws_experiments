@@ -1,15 +1,11 @@
 output "ansible_consul_servers" {
-  value = "${module.consul_servers.public_ip}"
+  value = "${module.consul_servers.private_ip}"
 }
 
 output "ansible_consul_agents" {
-  value = "${module.hosts.public_ip}"
-}
-
-output "ansible_prometheus_server" {
-  value = "${module.hosts.public_ip[0]}"
+  value = "${module.hosts.private_ip}"
 }
 
 output "ansible_docker_host" {
-  value = "${module.hosts.public_ip[1]}"
+  value = "${module.hosts.private_ip[0]}"
 }

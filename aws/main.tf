@@ -32,5 +32,6 @@ module "hosts" {
   source  = "./server"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
-  count   = 3
+  type = "t2.medium"
+  count   = 1
 }

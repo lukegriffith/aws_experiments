@@ -18,5 +18,4 @@
     pip_install_packages:
       - name: docker
   roles:
-    - geerlingguy.pip
     - docker.lg
