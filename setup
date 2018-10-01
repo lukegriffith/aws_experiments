@@ -10,7 +10,7 @@ cd aws_experiments
 source setEnv.sh
 terraform init
 terraform apply
-pip install virtualenv --user
+pip install virtualenv ansible --user
 virtualenv
 virtualenv ~/.ven
 source ~/.ven/bin/activate
