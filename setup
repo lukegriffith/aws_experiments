@@ -6,6 +6,7 @@ wget https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd6
 unzip terraform_0.11.8_linux_amd64.zip
 sudo mv terraform /usr/local/bin/
 ssh-keygen
+cd aws_experiments
 source setEnv.sh
 terraform init
 terraform apply
