@@ -6,6 +6,21 @@ variable "ami_id" {
   description = "ami id to launch"
 }
 
+variable "tags" {
+  description = "Tags to apply"
+  type        = "map"
+
+  default = {
+    Created-By = "Terraform"
+    Owner      = "Luke"
+  }
+}
+
+variable "name" {
+  description = "Value to apply to the name tag."
+  type        = "string"
+}
+
 variable "count" {
   description = "count of servers to launch"
   default     = 1
