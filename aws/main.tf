@@ -41,4 +41,9 @@ module "collins" {
   name    = "collins-cmdb"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
+<<<<<<< HEAD
+=======
+  type = "t2.medium"
+  count   = 1
+>>>>>>> 49d363a0b22002553279f21625558678865b2c72
 }

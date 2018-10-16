@@ -25,3 +25,18 @@ variable "count" {
   description = "count of servers to launch"
   default     = 1
 }
+
+
+variable "tags" {
+  description = "tags"
+  default = {
+    Owner = "lukeg"
+    Created-By = "Terraform"
+
+  }
+}
+
+variable "type" {
+  description = "type of server"
+  default = "t2.micro"
+}
