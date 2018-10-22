@@ -27,15 +27,6 @@ variable "count" {
 }
 
 
-variable "tags" {
-  description = "tags"
-  default = {
-    Owner = "lukeg"
-    Created-By = "Terraform"
-
-  }
-}
-
 variable "type" {
   description = "type of server"
   default = "t2.micro"
