@@ -10,8 +10,8 @@ readMsg(){
   
   while [ $counter -le $msg_count ] 
   do 
-    aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq -r .Messages[$counter].Body > "$id"
-    aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq -r .Messages[$counter].Body
+    aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq -r .Messages[$counter].Body | tee "$id"
+
   done
 }
 
