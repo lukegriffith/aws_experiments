@@ -61,7 +61,6 @@ cat * | jq 'select(.["detail-type"]=="AWS API Call via CloudTrail") | select(.de
 
 cat * | jq 'select(.["detail-type"]=="AWS API Call via CloudTrail") | select(.detail.eventName=="RunInstances") | .detail.responseElements.instancesSet.items[].instanceId'
 
-
 # state changes.
 cat * | jq 'select(.["detail-type"]=="EC2 Instance State-change Notification")'
 

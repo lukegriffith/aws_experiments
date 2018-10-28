@@ -1,5 +1,11 @@
 locals {
-  merged_tags = "${merge(var.tags, map("Name", var.name))}"
+  local_tags = {
+    Created-By = "Terraform"
+    Owner      = "Luke"
+    Name       = "${var.name}"
+  }
+  merged_tags = "${merge(var.tags, local.local_tags)}"
+
 }
 
 resource "aws_instance" "web" {

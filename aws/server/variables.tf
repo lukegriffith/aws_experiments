@@ -10,10 +10,7 @@ variable "tags" {
   description = "Tags to apply"
   type        = "map"
 
-  default = {
-    Created-By = "Terraform"
-    Owner      = "Luke"
-  }
+  default = {}
 }
 
 variable "name" {

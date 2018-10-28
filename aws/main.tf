@@ -28,20 +28,10 @@ module "consul_servers" {
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
   count   = 3
 }
-/*
+
 module "prometheus" {
   source  = "./server"
   name    = "prometheus"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
 }
-
-module "collins" {
-  source  = "./server"
-  name    = "collins-cmdb"
-  pub_key = "${aws_key_pair.deployer.key_name}"
-  ami_id  = "${data.aws_ami.amazon-linux-2.id}"
-  type = "t2.medium"
-  count   = 1
-}
-*/
