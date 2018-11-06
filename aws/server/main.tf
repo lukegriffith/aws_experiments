@@ -8,6 +8,12 @@ locals {
 
 }
 
+data "aws_vpcs" "foo" {
+  tags {
+    Name = "luke"
+  }
+}
+
 resource "aws_instance" "web" {
   ami           = "${var.ami_id}"
   instance_type = "${var.type}"
