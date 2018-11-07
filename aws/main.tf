@@ -27,6 +27,7 @@ module "consul_servers" {
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
   count   = 3
+  subnet_id = "subnet-0feb21e59626aa1f8"
 
   tags = {
     Role = "consul"
@@ -41,4 +42,5 @@ module "prometheus" {
   name    = "prometheus"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
+  subnet_id = "subnet-0feb21e59626aa1f8"
 }

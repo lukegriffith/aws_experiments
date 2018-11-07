@@ -19,7 +19,7 @@ variable "name" {
 
 variable "subnet_id" {
   description = "Subnet to place the EC2 instance in."
-  type        = "String"
+  type        = "string"
 }
 
 variable "count" {
