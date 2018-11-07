@@ -23,15 +23,18 @@ data "aws_ami" "amazon-linux-2" {
 
 module "consul_servers" {
   source  = "./server"
-  name    = "Consul-Servers"
+  name    = "ConsulMasters"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
   count   = 3
 
   tags = {
     Role = "consul"
+    Type = "master"
   }
 }
+
+
 
 module "prometheus" {
   source  = "./server"
