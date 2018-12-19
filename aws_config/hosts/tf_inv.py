@@ -26,7 +26,7 @@ def formatTf(parsedTf):
     return inventory
 
 
-pto = parseTfOut('/home/ec2-user/aws_experiments/aws')
+pto = parseTfOut('/home/ec2-user/environment/aws_experiments/aws')
 
 ft = formatTf(pto)
 print(ft)
