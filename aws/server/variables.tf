@@ -9,15 +9,16 @@ variable "ami_id" {
 variable "tags" {
   description = "Tags to apply"
   type        = "map"
-
-  default = {
-    Created-By = "Terraform"
-    Owner      = "Luke"
-  }
+  default     = {}
 }
 
 variable "name" {
   description = "Value to apply to the name tag."
+  type        = "string"
+}
+
+variable "subnet_id" {
+  description = "Subnet to place the EC2 instance in."
   type        = "string"
 }
 
@@ -29,5 +30,5 @@ variable "count" {
 
 variable "type" {
   description = "type of server"
-  default = "t2.micro"
+  default     = "t2.micro"
 }

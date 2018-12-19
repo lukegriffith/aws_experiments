@@ -1,2 +1,4 @@
 *tfstate*
 *.terraform*
+sqscmd/messages/*
+aws/tf_backend.tf

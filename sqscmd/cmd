@@ -1,0 +1,24 @@
+
+queueUrl=https://eu-west-1.queue.amazonaws.com/405574900227/ec2events
+
+readMsg(){
+
+  msg_count=$(aws sqs receive-message --queue-url amazonaws.com/405574900227/ec2events | jq .Messages[] | jq length)
+  id=$(aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq .Messages[$counter].MessageId -r)
+  
+  counter=0
+  
+  while [ $counter -le $msg_count ] 
+  do 
+    aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq -r .Messages[$counter].Body | tee "$id"
+
+  done
+}
+
+delMsg(){
+  
+  receipt=$(aws sqs receive-message --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events | jq .Messages[0].ReceiptHandle -r)
+
+  aws sqs delete-message --receipt-handle "$receipt" --queue-url https://eu-west-1.queue.amazonaws.com/405574900227/ec2events 
+
+}

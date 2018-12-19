@@ -23,25 +23,24 @@ data "aws_ami" "amazon-linux-2" {
 
 module "consul_servers" {
   source  = "./server"
-  name    = "Consul-Servers"
+  name    = "ConsulMasters"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
   count   = 3
+  subnet_id = "subnet-0feb21e59626aa1f8"
+
+  tags = {
+    Role = "consul"
+    Type = "master"
+  }
 }
-/*
+
+
+
 module "prometheus" {
   source  = "./server"
   name    = "prometheus"
   pub_key = "${aws_key_pair.deployer.key_name}"
   ami_id  = "${data.aws_ami.amazon-linux-2.id}"
+  subnet_id = "subnet-0feb21e59626aa1f8"
 }
-
-module "collins" {
-  source  = "./server"
-  name    = "collins-cmdb"
-  pub_key = "${aws_key_pair.deployer.key_name}"
-  ami_id  = "${data.aws_ami.amazon-linux-2.id}"
-  type = "t2.medium"
-  count   = 1
-}
-*/
